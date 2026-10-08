@@ -1,8 +1,9 @@
+task 5
+
 import json
 from matplotlib import Path
 
 # These values must come from calculations already performed
-# earlier in this script — do NOT manually type the results.
 
 findings = {
     "cleaned_total_revenue_inr": round(cleaned_total_revenue, 2),
@@ -42,8 +43,8 @@ findings = {
 }
 
 # Create narrator folder if it does not already exist
-output_dir = Path("narrator")
-output_dir.mkdir(exist_ok=True)
+narrator_dir = Path("narrator")
+narrator_dir.mkdir(parents=True, exist_ok=True)
 
 # Write structured JSON
 output_file = output_dir / "findings.json"
