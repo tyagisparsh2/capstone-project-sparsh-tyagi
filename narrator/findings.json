@@ -1,0 +1,82 @@
+import json
+from matplotlib import Path
+
+# These values must come from calculations already performed
+# earlier in this script — do NOT manually type the results.
+
+findings = {
+    "cleaned_total_revenue_inr": round(cleaned_total_revenue, 2),
+    "raw_total_revenue_inr": round(raw_total_revenue, 2),
+    "duplicate_reconciliation_delta_inr": round(
+        raw_total_revenue - cleaned_total_revenue, 2
+    ),
+
+    "return_rate_by_payment": {
+        "COD": round(return_rates["COD"], 1),
+        "CARD": round(return_rates["CARD"], 1),
+        "UPI": round(return_rates["UPI"], 1)
+    },
+
+    "highest_risk_segment": {
+        "payment_method": highest_risk_segment["payment_method"],
+        "city_tier": int(highest_risk_segment["city_tier"]),
+        "return_rate_pct": round(
+            highest_risk_segment["return_rate_pct"], 1
+        )
+    },
+
+    "true_peak_month": {
+        "month": true_peak_month["month"],
+        "revenue_inr": round(true_peak_month["revenue_inr"], 2)
+    },
+
+    "outlier_inflated_month": {
+        "month": outlier_inflated_month["month"],
+        "apparent_revenue_inr": round(
+            outlier_inflated_month["apparent_revenue_inr"], 2
+        ),
+        "corrected_revenue_inr": round(
+            outlier_inflated_month["corrected_revenue_inr"], 2
+        )
+    }
+}
+
+# Create narrator folder if it does not already exist
+output_dir = Path("narrator")
+output_dir.mkdir(exist_ok=True)
+
+# Write structured JSON
+output_file = output_dir / "findings.json"
+
+with open(output_file, "w", encoding="utf-8") as f:
+    json.dump(findings, f, indent=2)
+
+print(f"\nVerified findings exported to: {output_file}")
+print(json.dumps(findings, indent=2))
+
+
+
+{
+  "cleaned_total_revenue_inr": 97358.30,
+  "raw_total_revenue_inr": 99860.20,
+  "duplicate_reconciliation_delta_inr": 2501.90,
+  "return_rate_by_payment": {
+    "COD": 44.4,
+    "CARD": 14.7,
+    "UPI": 18.9
+  },
+  "highest_risk_segment": {
+    "payment_method": "COD",
+    "city_tier": 2,
+    "return_rate_pct": 54.5
+  },
+  "true_peak_month": {
+    "month": "2026-03",
+    "revenue_inr": 20318.90
+  },
+  "outlier_inflated_month": {
+    "month": "2026-01",
+    "apparent_revenue_inr": 29582.10,
+    "corrected_revenue_inr": 11637.10
+  }
+}
