@@ -1,6 +1,6 @@
 
 
-E-Commerce Sales & Returns Analysis
+E-Commerce Sales & Returns Analysis MamaEarth Returns and  Growth intelligence pipeline
 
 This project analyzes e-commerce orders to identify revenue trends, return patterns, and high-risk customer segments. The repository contains SQL analysis, Python EDA, visualizations, and a GenAI narrative layer.
 
